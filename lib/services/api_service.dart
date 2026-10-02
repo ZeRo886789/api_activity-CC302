@@ -6,9 +6,12 @@ import '../models/post.dart';
 
 class ApiService {
   final String url = 'https://jsonplaceholder.typicode.com/posts';
+  final http.Client _client;
+
+  ApiService({http.Client? client}) : _client = client ?? http.Client();
 
   Future<List<Post>> fetchPosts() async {
-    final response = await http.get(Uri.parse(url));
+    final response = await _client.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
       final List<dynamic> data = jsonDecode(response.body);

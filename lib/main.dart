@@ -8,7 +8,9 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ApiService? apiService;
+
+  const MyApp({super.key, this.apiService});
 
   @override
   Widget build(BuildContext context) {
@@ -18,20 +20,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
-      home: const HomePage(),
+      home: HomePage(apiService: apiService ?? ApiService()),
     );
   }
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final ApiService apiService;
+
+  const HomePage({super.key, required this.apiService});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final ApiService apiService = ApiService();
+  ApiService get apiService => widget.apiService;
 
   late Future<List<Post>> futurePosts;
 

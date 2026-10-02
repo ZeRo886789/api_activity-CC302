@@ -29,8 +29,9 @@ lib/
 ├── main.dart                 # UI, FutureBuilder, ListView.builder
 ├── models/
 │   └── post.dart             # Post model + Post.fromJson()
-└── services/
-    └── api_service.dart      # http.get() + jsonDecode()
+├── services/
+│   └── api_service.dart      # http.get() + jsonDecode()
+└── fruit_list.dart           # Separate ListView.builder practice app
 ```
 
 ## How It Works
@@ -63,3 +64,14 @@ JSONPlaceholder API
 flutter pub get
 flutter run
 ```
+
+## Testing
+
+```bash
+flutter analyze
+flutter test
+```
+
+The test suite covers the `Post` model, `ApiService` (including a live request
+to JSONPlaceholder), and all UI states: loading, success, empty, and error with
+retry.
